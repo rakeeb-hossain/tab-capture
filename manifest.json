@@ -7,7 +7,7 @@
             "matches": [
                 "<all_urls>"
             ],
-            "js": ["src/content.js"]
+            "js": ["src/content.js", "src/popup.js"]
         }
     ],
     "permissions": [
