@@ -36,10 +36,11 @@ chrome.runtime.onMessage.addListener(
                                     url: urls[i]
                                 }
                             )
-                        } 
-                    }
-                    
-                                           
+                        }
+                        // chrome.tabs.getCurrent(function(curr) {
+                        //     chrome.tabs.remove(curr.id); 
+                        // });
+                    }                      
                 });
             });
         }
