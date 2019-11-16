@@ -17,7 +17,8 @@ chrome.runtime.onMessage.addListener(
                     chrome.tabs.sendMessage(curr[0].id, {"message": "send_tabs", "content": tab_urls});
                 });
             });
-        } else if (request.message === "load_tabs") {
+        } 
+        else if (request.message === "load_tabs") {
             chrome.storage.sync.get('tabs_1', function(tabs) {
                 chrome.windows.create({focused: true}, function(win) {
                     const keys_array = Object.keys(tabs);
