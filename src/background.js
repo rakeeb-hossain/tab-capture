@@ -2,9 +2,7 @@
 
 chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
-        if (request.message === "open_tabs") {
-            console.log("opening...");
-        } else if (request.message === "get_tabs") {
+        if (request.message === "get_tabs") {
             chrome.tabs.query({
                 currentWindow: true
             }, function(tabs) {
@@ -21,8 +19,28 @@ chrome.runtime.onMessage.addListener(
             });
         } else if (request.message === "load_tabs") {
             chrome.storage.sync.get('tabs_1', function(tabs) {
-                console.log(tabs);
-            })
+                chrome.windows.create({focused: true}, function(win) {
+                    const keys_array = Object.keys(tabs);
+
+                    if (keys_array.length != 0) {
+                        const url_key =  keys_array[0];
+                        const urls = tabs[url_key];
+                        console.log(urls);
+                        console.log(urls.length);
+
+                        for (var i = 0; i < urls.length; i++) {
+                            chrome.tabs.create(
+                                {
+                                    windowId: win.id,
+                                    url: urls[i]
+                                }
+                            )
+                        } 
+                    }
+                    
+                                           
+                });
+            });
         }
     }
 )
